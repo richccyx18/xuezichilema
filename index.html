@@ -12,7 +12,14 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     min-height:100%; gap:18px; padding:30px;
   }
-  h1 { font-size:26px; margin:0 0 10px; }
+  h1 { font-size:46px; font-weight:900; letter-spacing:2px; margin:0 0 4px; text-align:center;
+       background:linear-gradient(135deg,#ffd0e6,#ff5fa2 60%,#e8a33d);
+       -webkit-background-clip:text; background-clip:text; color:transparent;
+       filter:drop-shadow(0 6px 16px rgba(255,95,162,.35)); animation:bob 3s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  .slogan { font-size:15px; line-height:1.9; text-align:center; max-width:300px; font-weight:600; color:#ffe0ee;
+            padding:13px 20px; border-radius:16px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12);
+            box-shadow:0 6px 18px rgba(0,0,0,.25); }
   a {
     display:flex; align-items:center; justify-content:center;
     width:min(80vw,300px); padding:22px; border-radius:18px;
@@ -28,6 +35,7 @@
   <h1>🍓 雪子</h1>
   <a class="eat"   href="eat.html">🍽️ 雪子吃了吗？</a>
   <a class="drink" href="drink.html">🍺 雪子喝了吗？</a>
+  <div class="slogan">不管开心还是难过，<br>都要记得好好吃饭 🍚</div>
   <div class="hint">点进去转盘后，<br>用 Safari「分享 → 添加到主屏幕」放桌面</div>
 </body>
 </html>
