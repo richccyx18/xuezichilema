@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>雪子喝了吗？</title>
 <style>
-  :root { --bg:#241a10; --card:#33271a; --accent:#e8a33d; --text:#fff; }
+  :root { --bg:#ffe0ec; --card:#ffffff; --accent:#e8a33d; --text:#6b3a52; }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { background:#ffe0ec; }
   html,body { margin:0; height:100%; }
   body {
-    background:radial-gradient(120% 120% at 50% 0%, #2a2152 0%, var(--bg) 60%);
+    background:radial-gradient(120% 120% at 50% 0%, #fff4f9 0%, var(--bg) 60%);
     color:var(--text); font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
     display:flex; flex-direction:column; align-items:center;
     min-height:100%; padding:18px 16px 28px; gap:14px; user-select:none;
@@ -17,10 +18,11 @@
   h1 { font-size:22px; margin:4px 0 0; font-weight:700; letter-spacing:1px; }
   .cats { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:440px; }
   .cat {
-    border:1px solid rgba(255,255,255,.18); background:var(--card); color:var(--text);
+    border:1px solid rgba(0,0,0,.08); background:var(--card); color:var(--text);
     padding:7px 13px; border-radius:999px; font-size:14px; cursor:pointer; transition:.15s;
+    box-shadow:0 2px 6px rgba(0,0,0,.06);
   }
-  .cat.active { background:var(--accent); border-color:var(--accent); font-weight:700; }
+  .cat.active { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:700; }
   .stage { position:relative; width:min(86vw,340px); aspect-ratio:1/1; margin-top:4px; }
   .pointer {
     position:absolute; top:-6px; left:50%; transform:translateX(-50%);
