@@ -43,9 +43,13 @@
   }
   .again:active { transform:scale(.96); }
   .hint { font-size:13px; opacity:.6; margin-top:-4px; }
+  .bg{ position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+  .bg span{ position:absolute; will-change:transform; animation:drift var(--dur,16s) ease-in-out infinite alternate; }
+  @keyframes drift{ from{transform:translate(0,0) rotate(0)} to{transform:translate(var(--dx,30px),var(--dy,-20px)) rotate(var(--rot,60deg))} }
 </style>
 </head>
 <body>
+  <div class="bg" id="bg"></div>
   <h1>雪子吃了吗？ 🍓</h1>
   <div class="cats" id="cats"></div>
   <div class="stage" id="stage">
@@ -58,6 +62,16 @@
   <div class="hint">点中间转盘或下方按钮都行</div>
 
 <script>
+(function(){
+  var E=["🍜","🍔","🍣","🍕","🍗","🍙","🥟","🌮","🍱","🍰","🍤","🍚","🍛","🍲","🍢","🍦","🍓","🧆"];
+  var bg=document.getElementById("bg");
+  for(var i=0;i<24;i++){ var s=document.createElement("span"); s.textContent=E[Math.floor(Math.random()*E.length)];
+    s.style.left=(Math.random()*94).toFixed(1)+"%"; s.style.top=(Math.random()*92).toFixed(1)+"%";
+    s.style.fontSize=(20+Math.random()*22).toFixed(0)+"px"; s.style.opacity=(0.1+Math.random()*0.14).toFixed(2);
+    s.style.setProperty("--dx",(Math.random()*160-80).toFixed(0)+"px"); s.style.setProperty("--dy",(Math.random()*160-80).toFixed(0)+"px");
+    s.style.setProperty("--rot",(Math.random()*300-150).toFixed(0)+"deg"); s.style.setProperty("--dur",(12+Math.random()*16).toFixed(0)+"s");
+    s.style.animationDelay=(-Math.random()*24).toFixed(1)+"s"; bg.appendChild(s); }
+})();
 const MENU = {
   "全部随机":   [],
   "贵州粉面":   ["牛肉粉","羊肉粉","肠旺面","素粉","酸汤粉","卷粉","脆哨面","花溪牛肉粉"],

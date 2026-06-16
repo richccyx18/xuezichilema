@@ -13,8 +13,20 @@
     min-height:100%; gap:18px; padding:30px; overflow-x:hidden; position:relative;
   }
   .bg{ position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
-  .bg span{ position:absolute; bottom:-50px; font-size:26px; opacity:0; animation:rise linear infinite; }
-  @keyframes rise{ 0%{transform:translateY(0) rotate(0); opacity:0} 12%{opacity:.2} 88%{opacity:.2} 100%{transform:translateY(-118vh) rotate(220deg); opacity:0} }
+  .bg span{ position:absolute; will-change:transform; animation:drift var(--dur,16s) ease-in-out infinite alternate; }
+  @keyframes drift{ from{transform:translate(0,0) rotate(0)} to{transform:translate(var(--dx,30px),var(--dy,-20px)) rotate(var(--rot,60deg))} }
+  /* 小女孩喝酒吃饭 */
+  .girl{ position:fixed; right:12px; bottom:12px; width:104px; height:104px; z-index:5; pointer-events:none; }
+  .girl>div{ position:absolute; }
+  .girl .g{ left:30px; bottom:22px; font-size:44px; transform-origin:bottom; animation:gbob .9s ease-in-out infinite; }
+  .girl .wine{ left:6px; bottom:30px; font-size:30px; transform-origin:bottom right; animation:sip 2.6s ease-in-out infinite; }
+  .girl .food{ left:52px; bottom:0; font-size:38px; filter:drop-shadow(0 3px 5px rgba(0,0,0,.4)); }
+  .girl .steam{ left:60px; bottom:42px; display:flex; gap:5px; }
+  .girl .steam i{ width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.55); animation:steam 1.7s ease-in infinite; }
+  .girl .steam i:nth-child(2){ animation-delay:.6s } .girl .steam i:nth-child(3){ animation-delay:1.2s }
+  @keyframes gbob{ 0%,100%{transform:translateY(0) scaleY(1)} 50%{transform:translateY(2px) scaleY(.96)} }
+  @keyframes sip{ 0%,68%,100%{transform:translate(0,6px) rotate(0)} 80%,90%{transform:translate(16px,-10px) rotate(-32deg)} }
+  @keyframes steam{ 0%{opacity:0;transform:translateY(0) scale(.5)} 30%{opacity:.7} 100%{opacity:0;transform:translateY(-22px) scale(1.4)} }
   h1 { font-size:46px; font-weight:900; letter-spacing:2px; margin:0 0 4px; text-align:center;
        background:linear-gradient(135deg,#ffd0e6,#ff5fa2 60%,#e8a33d);
        -webkit-background-clip:text; background-clip:text; color:transparent;
@@ -35,24 +47,36 @@
 </style>
 </head>
 <body>
-  <div class="bg">
-    <span style="left:6%;animation-duration:15s;animation-delay:0s">❄️</span>
-    <span style="left:16%;animation-duration:19s;animation-delay:3s">🐎</span>
-    <span style="left:27%;animation-duration:16s;animation-delay:6s">🍺</span>
-    <span style="left:38%;animation-duration:21s;animation-delay:1s">🍓</span>
-    <span style="left:49%;animation-duration:15s;animation-delay:8s">🧋</span>
-    <span style="left:60%;animation-duration:20s;animation-delay:4s">❄️</span>
-    <span style="left:70%;animation-duration:17s;animation-delay:10s">🍷</span>
-    <span style="left:80%;animation-duration:22s;animation-delay:2s">🍰</span>
-    <span style="left:90%;animation-duration:16s;animation-delay:7s">🐎</span>
-    <span style="left:33%;animation-duration:23s;animation-delay:12s">🥂</span>
-    <span style="left:55%;animation-duration:18s;animation-delay:9s">🍣</span>
-    <span style="left:85%;animation-duration:24s;animation-delay:14s">🍺</span>
-  </div>
+  <div class="bg" id="bg"></div>
   <h1>🍓 雪子</h1>
   <a class="eat"   href="eat.html">🍽️ 雪子吃了吗？</a>
   <a class="drink" href="drink.html">🍺 雪子喝了吗？</a>
   <div class="slogan">不管开心还是难过，都要记得好好吃饭 🍚</div>
   <div class="hint">点进去转盘后，<br>用 Safari「分享 → 添加到主屏幕」放桌面</div>
+
+  <div class="girl" aria-hidden="true">
+    <div class="steam"><i></i><i></i><i></i></div>
+    <div class="wine">🍷</div>
+    <div class="g">👧</div>
+    <div class="food">🍜</div>
+  </div>
+
+  <script>
+  (function(){
+    var E=["❄️","❄️","❄️","❄️","❄️","🐎","🐎","🐎","🐎","🐎","🍺","🍺","🍓","🧋","🍷","🥂","🍰","🍣","🍱","🍙"];
+    var bg=document.getElementById("bg");
+    for(var i=0;i<26;i++){ var s=document.createElement("span");
+      s.textContent=E[Math.floor(Math.random()*E.length)];
+      s.style.left=(Math.random()*94).toFixed(1)+"%"; s.style.top=(Math.random()*92).toFixed(1)+"%";
+      s.style.fontSize=(20+Math.random()*24).toFixed(0)+"px"; s.style.opacity=(0.14+Math.random()*0.16).toFixed(2);
+      s.style.setProperty("--dx",(Math.random()*160-80).toFixed(0)+"px");
+      s.style.setProperty("--dy",(Math.random()*160-80).toFixed(0)+"px");
+      s.style.setProperty("--rot",(Math.random()*300-150).toFixed(0)+"deg");
+      s.style.setProperty("--dur",(12+Math.random()*16).toFixed(0)+"s");
+      s.style.animationDelay=(-Math.random()*24).toFixed(1)+"s";
+      bg.appendChild(s);
+    }
+  })();
+  </script>
 </body>
 </html>
