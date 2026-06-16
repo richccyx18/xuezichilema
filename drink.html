@@ -7,14 +7,14 @@
 <style>
   :root { --bg:#ffe0ec; --card:#ffffff; --accent:#e8a33d; --text:#6b3a52; }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html { background:#ffe0ec; }
   html,body { margin:0; height:100%; }
   body {
-    background:radial-gradient(120% 120% at 50% 0%, #fff4f9 0%, var(--bg) 60%);
+    background:transparent;
     color:var(--text); font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
     display:flex; flex-direction:column; align-items:center;
     min-height:100%; padding:18px 16px 28px; gap:14px; user-select:none;
   }
+  .bgc{ position:fixed; inset:0; z-index:-2; background:linear-gradient(160deg,#fff8fb 0%,#ffeef5 55%,#ffe7ee 100%); }
   h1 { font-size:22px; margin:4px 0 0; font-weight:700; letter-spacing:1px; }
   .cats { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:440px; }
   .cat {
@@ -51,6 +51,7 @@
 </style>
 </head>
 <body>
+  <div class="bgc"></div>
   <div class="bg" id="bg"></div>
   <h1>雪子喝了吗？ 🍺</h1>
   <div class="cats" id="cats"></div>
